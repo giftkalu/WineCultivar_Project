@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wine Cultivar Predictor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #999;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+        
+        input {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        input::placeholder {
+            color: #bbb;
+        }
+        
+        button {
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .prediction-result {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+        }
+        
+        .prediction-result h2 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+        
+        .prediction-result p {
+            font-size: 28px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍷 Wine Cultivar Predictor</h1>
+        <p class="subtitle">Enter wine characteristics to predict cultivar</p>
+        
+        <form method="POST">
+            <div class="form-group">
+                <label for="alcohol">Alcohol (%)</label>
+                <input type="number" id="alcohol" name="alcohol" placeholder="e.g., 12.5" step="0.1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="malic_acid">Malic Acid</label>
+                <input type="number" id="malic_acid" name="malic_acid" placeholder="e.g., 2.5" step="0.01" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="ash">Ash</label>
+                <input type="number" id="ash" name="ash" placeholder="e.g., 2.5" step="0.01" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="magnesium">Magnesium</label>
+                <input type="number" id="magnesium" name="magnesium" placeholder="e.g., 95" step="1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="flavanoids">Flavanoids</label>
+                <input type="number" id="flavanoids" name="flavanoids" placeholder="e.g., 2.5" step="0.01" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="color_intensity">Color Intensity</label>
+                <input type="number" id="color_intensity" name="color_intensity" placeholder="e.g., 5.2" step="0.1" required>
+            </div>
+            
+            <button type="submit">Predict Cultivar</button>
+        </form>
+        
+        {% if prediction %}
+        <div class="prediction-result">
+            <h2>Predicted Cultivar</h2>
+            <p>{{ prediction }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
